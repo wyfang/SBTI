@@ -43,7 +43,8 @@ npm run build
 
 ```
 ├── dist/                   # 构建产物
-├── image/                  # 人格结果海报图片
+├── public/
+│   └── image/              # 人格结果海报图片
 ├── src/
 │   ├── components/
 │   │   ├── Home.tsx       # 首页
