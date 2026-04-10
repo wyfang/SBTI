@@ -95,15 +95,15 @@ export default function Test({ questions, answers, onAnswer, onComplete }: TestP
   };
 
   return (
-    <div className="min-h-screen flex flex-col pb-24">
-      <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full px-4 py-8">
+    <div className="min-h-screen flex flex-col">
+      <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full px-4 pt-6 pb-24">
         {/* Progress Bar */}
-        <div className="w-full mb-8 md:mb-12">
-          <div className="flex justify-between text-sm font-medium text-gray-500 mb-3">
+        <div className="w-full mb-6 md:mb-8">
+          <div className="flex justify-between text-sm font-medium text-gray-500 mb-2">
             <span>测试进度</span>
             <span>{Math.round(progress)}%</span>
           </div>
-          <div className="h-2.5 w-full bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
             <motion.div 
               className="h-full bg-emerald-500 rounded-full"
               initial={{ width: 0 }}
@@ -113,8 +113,8 @@ export default function Test({ questions, answers, onAnswer, onComplete }: TestP
           </div>
         </div>
 
-        {/* Question Container */}
-        <div className="flex-1 relative flex flex-col justify-center">
+        {/* Question Container - Allow scrolling, always show bottom nav */}
+        <div className="flex-1 relative">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={currentQuestion.id}
@@ -124,7 +124,7 @@ export default function Test({ questions, answers, onAnswer, onComplete }: TestP
               animate="center"
               exit="exit"
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="w-full max-w-2xl mx-auto"
+              className="w-full"
             >
               <div className="text-center mb-8 md:mb-10">
                 <span className="inline-block px-3 py-1 mb-4 md:mb-6 text-xs font-semibold tracking-wider text-emerald-600 uppercase bg-emerald-50 rounded-full">

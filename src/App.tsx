@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Home from './components/Home';
 import Test from './components/Test';
 import Result from './components/Result';
-import { questions, specialQuestions, Question } from './data';
+import { questions, specialQuestions, Question, TYPE_LIBRARY, dimensionOrder } from './data';
 import { computeResult } from './utils';
 
 type Screen = 'home' | 'test' | 'result';
@@ -56,6 +56,37 @@ export default function App() {
     setAnswers({});
     setResultData(null);
   };
+
+  // Easter egg: Press P to random result
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key.toLowerCase() === 'p' && screen !== 'result') {
+        const typeCodes = Object.keys(TYPE_LIBRARY);
+        const randomCode = typeCodes[Math.floor(Math.random() * typeCodes.length)];
+        const randomType = TYPE_LIBRARY[randomCode];
+        // Generate random levels and scores for radar chart
+        const levels: Record<string, string> = {};
+        const rawScores: Record<string, number> = {};
+        dimensionOrder.forEach(dim => {
+          const score = Math.floor(Math.random() * 3) + 1;
+          rawScores[dim] = score;
+          levels[dim] = score === 1 ? 'L' : score === 2 ? 'M' : 'H';
+        });
+        setResultData({
+          finalType: randomType,
+          modeKicker: '测试员专用',
+          badge: '🎲 随机人格',
+          sub: '这是开发者彩蛋，随机生成的人格仅供参考娱乐',
+          special: false,
+          levels,
+          rawScores
+        });
+        setScreen('result');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [screen]);
 
   // Compute visible questions dynamically based on answers
   const getVisibleQuestions = () => {

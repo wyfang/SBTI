@@ -24,27 +24,14 @@ export default function Result({ resultData, onRestart }: ResultProps) {
           <div className="bg-white rounded-3xl p-6 shadow-sm border border-emerald-100 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-bl-full -z-10" />
             
-            <div className="aspect-square rounded-2xl overflow-hidden bg-gray-50 mb-6 relative group">
-              {imageSrc ? (
-                <img 
-                  src={imageSrc} 
-                  alt={finalType.cn} 
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-gray-400">
-                  无图片
-                </div>
-              )}
-            </div>
-
-            <div className="space-y-4 text-center">
+            <div className="space-y-4 text-center mb-6">
               <div className="inline-block px-3 py-1 text-xs font-bold tracking-wider text-emerald-600 uppercase bg-emerald-50 rounded-full">
                 {modeKicker}
               </div>
               
               <div>
-                <h1 className="text-4xl font-black text-gray-900 mb-2">
+                <p className="text-gray-500 mb-2">你的人格类型是：</p>
+                <h1 className="text-4xl font-black text-emerald-600 mb-2">
                   {finalType.code}
                 </h1>
                 <h2 className="text-2xl font-bold text-gray-700">
@@ -59,6 +46,20 @@ export default function Result({ resultData, onRestart }: ResultProps) {
               <p className="text-sm text-gray-500 leading-relaxed">
                 {sub}
               </p>
+            </div>
+
+            <div className="aspect-square rounded-2xl overflow-hidden bg-gray-50 relative group">
+              {imageSrc ? (
+                <img 
+                  src={imageSrc} 
+                  alt={finalType.cn} 
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-gray-400">
+                  无图片
+                </div>
+              )}
             </div>
           </div>
         </div>
